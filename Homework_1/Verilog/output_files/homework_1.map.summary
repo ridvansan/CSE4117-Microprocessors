@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Thu Nov 18 14:57:28 2021
+Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
+Revision Name : homework_1
+Top-level Entity Name : homework_1
+Family : Cyclone IV E
+Total logic elements : 4,061
+    Total combinational functions : 2,138
+    Dedicated logic registers : 2,222
+Total registers : 2222
+Total pins : 14
+Total virtual pins : 0
+Total memory bits : 0
+Embedded Multiplier 9-bit elements : 0
+Total PLLs : 0

@@ -1,0 +1,44 @@
+.data
+	TERMS: 6
+	isOdd: 0
+	temp: 0
+	result: 0
+	zero: 0
+	one: 1
+	sum: 0
+.code
+	ldi 0 sum
+	ld 0 0
+	ldi 1 TERMS
+	ld 1 1
+	jz out
+	ldi 2 isOdd
+	ld 2 2
+	ldi 3 temp
+	ld 3 3
+	ldi 4 result
+	ld 4 4
+	ldi 5 zero
+	ld 5 5
+	ldi 6 one
+	ld 6 6
+square	mov 3 1
+squarecont	add 4 4 1
+	dec 3
+	jz oddchk
+	jmp squarecont
+oddchk	and 2 1 6 
+	jz oddgo
+	jmp evengo
+oddgo	dec 1
+	jmp square
+	jz out
+	jmp evengo
+evengo	dec 1
+	jz out
+	dec 1
+	jz out
+	jmp square
+	jmp evengo
+out	add 0 0 4
+end	jmp end

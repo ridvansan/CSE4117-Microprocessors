@@ -131,6 +131,8 @@ def get_data(line):
         parameters.pop()
     name = parameters[1][:-1]
     value = parameters[2]
+    if value[:2] == "0x":
+        value = int(value,16)
     return name,value
 
 

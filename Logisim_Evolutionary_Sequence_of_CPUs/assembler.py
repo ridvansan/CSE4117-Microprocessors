@@ -107,7 +107,7 @@ def add_to_datatable(name,value):
         if datatable[name][0][0] == -1:
             datatable[name][0][0] = value
         else:
-            print(f"Error: to variables created with the same name '{name}'")
+            raise Exception(f"Error: to variables created with the same name '{name}'")
 
 def add_data_request(name,assembly_line):
     if name not in datatable.keys():
@@ -189,7 +189,7 @@ for line in lines:
             binary = (opcodes[instruction]<< 12) + ((int(dest) << 3)) + (int(src1))
         elif instruction == "st":
             binary = (opcodes[instruction]<< 12) + ((int(dest) << 6)) + (int(src1) << 3)
-        elif instruction == "jmp" or instruction == "jz":
+        elif (instruction == "jmp") or (instruction == "jz") or (instruction == "call"):
             if address_bit_size == 12:
                 binary = opcodes[instruction]<< 12
                 if dest.isnumeric():
@@ -204,7 +204,15 @@ for line in lines:
                     binary = (int(src1) & 0xffff)
                 else:
                     binary = 0x0000
-                    add_jump_request(dest,assembly_idx) 
+                    add_jump_request(dest,assembly_idx)
+        elif instruction == "push":
+            binary = (opcodes[instruction]<< 12) + (int(dest) << 6)
+        elif instruction == "pop":
+            binary = (opcodes[instruction]<< 12) + (int(dest))
+        elif instruction == "ret":
+            binary = (opcodes[instruction]<< 12)
+        else:
+            print(f"Error: Instruction '{instruction}' does not exist or not supportted with this assembler")
         machine_code.append(binary)
         assembly_idx += 1
 

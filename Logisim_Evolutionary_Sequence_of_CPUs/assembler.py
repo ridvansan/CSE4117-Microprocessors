@@ -133,6 +133,8 @@ def get_data(line):
     value = parameters[2]
     if value[:2] == "0x":
         value = int(value,16)
+    else:
+        value = int(value)
     return name,value
 
 
@@ -164,8 +166,7 @@ for line in lines:
         continue
 
     if status == 1:
-        a,b = get_data(line)
-        add_to_datatable(a,b)
+        add_to_datatable(get_data(line)[0],get_data(line)[1])
 
     if status == 2:
         label,instruction,dest,src1,src2 = get_parameters(line)
@@ -178,7 +179,7 @@ for line in lines:
                 binary = (opcodes["alu"] << 12) + (0x7<<9) + (reptile_8_alucodes[instruction] << 6) + (int(src1) << 3) + (int(dest))
             elif instruction == "inc" or instruction == "dec":
                 binary = (opcodes["alu"] << 12) + (0x7<<9) + (reptile_8_alucodes[instruction] << 6) + (int(dest) << 3) + (int(dest))
-        if instruction == "ldi":
+        elif instruction == "ldi":
             binary = (opcodes[instruction]<< 12) + (int(dest) & 0x7)
             machine_code.append(binary)
             assembly_idx += 1

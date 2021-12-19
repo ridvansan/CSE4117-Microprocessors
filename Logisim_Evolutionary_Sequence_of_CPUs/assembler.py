@@ -63,13 +63,25 @@ def get_parameters(line):
     src2 = 0
     #Fill the variables due to length of the parameter in order to avoid array border infringement
     if len(parameters) > 1:
-        instruction = parameters[1]
+        if parameters[1][:2] == "//":
+            return label,instruction,dest,src1,src2
+        else:
+            instruction = parameters[1]
         if len(parameters) > 2:
-            dest = parameters[2]
+            if parameters[2][:2] == "//":
+                return label,instruction,dest,src1,src2
+            else:
+                dest = parameters[2]
             if len(parameters) > 3:
-                src1 = parameters[3]
+                if parameters[3][:2] == "//":
+                    return label,instruction,dest,src1,src2
+                else:
+                    src1 = parameters[3]
                 if len(parameters) > 4:
-                    src2 = parameters[4]
+                    if parameters[4][:2] == "//":
+                        return label,instruction,dest,src1,src2
+                    else:
+                        src2 = parameters[4]
     return label,instruction,dest,src1,src2
 
 #Adding the label to the table if not added

@@ -1,0 +1,14 @@
+.data
+	TERMS: 6
+	isOdd: 0
+	temp: 0
+	result: 0
+	zero: 0
+evengo	dec 1
+	jz out
+	dec 1
+	jz out
+	jmp square
+	jmp evengo
+out	add 0 0 4
+end	jmp end

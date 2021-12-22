@@ -56,32 +56,31 @@ def get_parameters(line):
     parameters = re.split("\s+|\t",line)
     if parameters[len(parameters)-1] == "":
         parameters.pop()
-    label = parameters[0]
+    label = ""
     instruction = 0
     dest = 0
     src1 = 0
     src2 = 0
+    if (len(parameters) == 0) or parameters[0][:2] == "//":
+         return label,instruction,dest,src1,src2
+    label = parameters[0]
     #Fill the variables due to length of the parameter in order to avoid array border infringement
     if len(parameters) > 1:
         if parameters[1][:2] == "//":
             return label,instruction,dest,src1,src2
-        else:
-            instruction = parameters[1]
-        if len(parameters) > 2:
-            if parameters[2][:2] == "//":
-                return label,instruction,dest,src1,src2
-            else:
-                dest = parameters[2]
-            if len(parameters) > 3:
-                if parameters[3][:2] == "//":
-                    return label,instruction,dest,src1,src2
-                else:
-                    src1 = parameters[3]
-                if len(parameters) > 4:
-                    if parameters[4][:2] == "//":
-                        return label,instruction,dest,src1,src2
-                    else:
-                        src2 = parameters[4]
+        instruction = parameters[1]
+    if len(parameters) > 2:
+        if parameters[2][:2] == "//":
+            return label,instruction,dest,src1,src2
+        dest = parameters[2]
+    if len(parameters) > 3:
+        if parameters[3][:2] == "//":
+            return label,instruction,dest,src1,src2
+        src1 = parameters[3]
+    if len(parameters) > 4:
+        if parameters[4][:2] == "//":
+            return label,instruction,dest,src1,src2
+    src2 = parameters[4]
     return label,instruction,dest,src1,src2
 
 #Adding the label to the table if not added
@@ -163,7 +162,8 @@ status = 0
 #First Iteration
 assembly_idx = 0
 for line in lines:
-    
+    if len(line) == 0:
+        continue
     parameters = re.split("\s+|\t",line)
     #Check the line is a comment or not
     if line[:2] == "//":

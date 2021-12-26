@@ -48,7 +48,7 @@ datatable={
 machine_code = []
 
 register_bit_size = 3
-address_bit_size = 12
+address_bit_size = 16
 
 
 def get_parameters(line):
@@ -80,7 +80,7 @@ def get_parameters(line):
     if len(parameters) > 4:
         if parameters[4][:2] == "//":
             return label,instruction,dest,src1,src2
-    src2 = parameters[4]
+        src2 = parameters[4]
     return label,instruction,dest,src1,src2
 
 #Adding the label to the table if not added
@@ -103,10 +103,10 @@ def add_jump_request(name,assembly_line):
 
 def get_offset(name,current_line):
     if name in jumptable.keys():
-        result =  jumptable[name][0] - current_line - 1
+        result =  jumptable[name][0] - current_line
         if result < 0:
             result += (pow(2,address_bit_size))
-        return result & (pow(2,address_bit_size)-1)
+        return result & (pow(2,address_bit_size) -1)
     else:
         print(f"in line {current_line}: Address {name} is not found on declared addresses.")
 
@@ -153,7 +153,7 @@ def get_data(line):
 #Argument Handling (only reads the first argument if there is no argument than use "example_program.txt")
 if len(sys.argv) == 1:
     lines = open("example_program.txt","r").readlines()
-if len(sys.argv) == 2:
+elif len(sys.argv) == 2:
     lines = open(sys.argv[1],"r").readlines()
 
 #in order to check the which section of the code is processing (0 for .data, 1 for .code)
@@ -195,7 +195,7 @@ for line in lines:
             binary = (opcodes[instruction]<< 12) + (int(dest) & 0x7)
             machine_code.append(binary)
             assembly_idx += 1
-            if src1.isnumeric():
+            if str(src1).isnumeric():
                 binary = (int(src1) & 0xffff)
             else:
                 binary = 0x0000
@@ -207,7 +207,7 @@ for line in lines:
         elif (instruction == "jmp") or (instruction == "jz") or (instruction == "call"):
             if address_bit_size == 12:
                 binary = opcodes[instruction]<< 12
-                if dest.isnumeric():
+                if str(dest).isnumeric():
                     binary += (int(dest) & 0xfff)
                 else:
                     add_jump_request(dest,assembly_idx) 
@@ -215,8 +215,9 @@ for line in lines:
                 binary = opcodes[instruction]<< 12
                 machine_code.append(binary)
                 assembly_idx += 1
-                if src1.isnumeric():
-                    binary = (int(src1) & 0xffff)
+                print(dest)
+                if str(dest).isnumeric():
+                    binary = (int(dest) & 0xffff)
                 else:
                     binary = 0x0000
                     add_jump_request(dest,assembly_idx)
@@ -235,6 +236,7 @@ for line in lines:
 #Filling the jump addresses via getting offset from request to labels and adding into the code
 for label in jumptable.keys():
     for i in jumptable[label][1]:
+        print(f"{i} : {get_offset(label,i)}")
         machine_code[i] += get_offset(label,i)
 
 for data in datatable.keys():

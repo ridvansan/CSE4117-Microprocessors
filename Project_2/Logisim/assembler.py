@@ -78,13 +78,13 @@ def argument_handler(args):
                 i += 1
                 outputfile = args[i]
             elif args[i] == "-h" or args[i] == "--help":
-                print("help")
-                exit()
+                show_help_message()
             elif args[i] == "-l" or args[i] == "--logisim":
                 isLogisim = True
         return inputfile, outputfile, isLogisim
     except:
-        raise Exception("Program ran via wrong input parameters check --help for detailed info")
+        print("Program ran via wrong input parameters check --help for detailed info")
+        show_help_message()
 
 
 def get_instruction_code(instruction, dest, src1, src2,idx):
@@ -116,7 +116,7 @@ def get_instruction_code(instruction, dest, src1, src2,idx):
     elif instruction == "ld":
         binary = (opcodes[instruction] << 12) + ((int(dest) << 3)) + (int(src1))
     elif instruction == "st":
-        binary = (opcodes[instruction] << 12) + ((int(dest) << 6)) + (int(src1) << 3)
+        binary = (opcodes[instruction] << 12) + ((int(src1) << 6)) + (int(dest) << 3)
     elif (instruction == "jmp") or (instruction == "jz") or (instruction == "call"):
         if address_bit_size == 12:
             binary = opcodes[instruction] << 12
@@ -296,7 +296,4 @@ if __name__ == '__main__':
         for i in datatable[data][1]:
             machine_code[i] += get_data_offset(data)
 
-    print(machine_code)
-    print(datatable)
-    print(jumptable)
     write_output(out_file, machine_code, is_logisim)

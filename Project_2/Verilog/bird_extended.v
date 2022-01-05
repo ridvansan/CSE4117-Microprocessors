@@ -30,7 +30,8 @@ localparam	FETCH=4'b0000,
 			RET2=4'b1101;
  
  
-wire zeroresult; 
+wire zeroresult;
+assign sp = regbank[7]
 
 always @(posedge clk)
 	case(state) 
@@ -80,61 +81,71 @@ always @(posedge clk)
  
 		PUSH:
 			begin
-				 regbank[7]<=regbank[7]-1;
+				 sp <= sp - 1;
 				 state <= FETCH;
 			end
  
 		POP1:
 			begin
-				//to be added
+				sp <= sp + 1;
 				state <= POP2;
 			end
  
 		POP2: 
 			begin
-				//to be added
+				regbank[ir[2:0]] <= data_in;
 				state <= FETCH;
 			end
  
 		CALL: 
 			begin
-			        //to be added
+			    sp <= sp - 1;
 				state <= JMP;
 			end
  
 		RET1:
 			begin
-				//to be added
+				sp <= sp + 1;
 				state <= RET2;
 			end
  
 		RET2:
 			begin
-				//to be added
 				state <= FETCH;
 			end
  
 	endcase
- 
+
+//Determining the ADDR_OUT (ARMUX in logisim)
 always @* //ADDR_OUT
 	case (state)
 		LD:     address=regbank[ir[5:3]][15:0];
 		ST:	    address=regbank[ir[5:3]][15:0];
-		PUSH:	address=regbank[7];
-		POP2:	address=regbank[7];
-		RET2:	address=regbank[7];
+		PUSH:	address=sp;
+		CALL:	address=sp;
+		POP2:	address=sp;
+		RET2:	address=sp;
 		default: address=pc;
 	endcase
  
-
+//Memory load operands
 assign memld = (state==ST) || (state == CALL) || (state == PUSH)
- 
+
+//Determining the DATA_OUT (DATAMUX in logisim)
 always @*
 	case (state)
 		CALL: data_out = pc;
 		default: data_out = regbank[ir[8:6]];
 	endcase
- 
+
+//Determining the PC input (PCMUX in logisim)
+always @*
+	case (state)
+		RET2: pc = data_in;
+		default: pc = pc + 1; //Can cause error.
+	endcase
+
+
 always @* //ALU Operation
 	case (ir[11:9])
 		3'h0: result = regbank[ir[8:6]]+regbank[ir[5:3]]; //000
@@ -151,7 +162,7 @@ always @* //ALU Operation
 		     endcase
 		default: result=16'h0000;
 	endcase
- 
+
 assign zeroresult = ~|result;
  
 initial begin;

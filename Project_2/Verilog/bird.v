@@ -1,127 +1,158 @@
-module bird_extended (
-    input CLK,
-    input [15:0] DATA_IN,
-    output [15:0] DATA_OUT,
-    output reg [15:0] ADDR_OUT,
-    output MEMLD
-);
-
-
-
-reg [15:0] pc;
-reg [12:0] ir;
-reg [3:0] operation;
-reg [15:0]register_bank[7:0];
-reg [15:0]stack_pointer;
-reg ZF;
-assign src1 = ir[2:0];
-//devam
-
-
-localparam  FETCH=4'b0000,
-            LDI=4'b0001, 
-            LD=4'b0010,
-            ST=4'b0011,
-            JZ=4'b0100,
-            JMP=4'b0101,
-            ALU=4'b0111;
-            PUSH=4'b1000;
-            POP1=4'b1001;
-            CALL=4'b1010;
-            RET1=4'b1011;
-            POP2=4'b1100;
-            RET2=4'b1101;
-
-always @(posedge clk ) begin
-    case(operation)
-        FETCH:
-        begin
-            if(operation==JZ)
-                if(ZF)
-                    operation<=JMP
-                else
-                    operation<=FETCH
-            else
-                operation <= DATA_IN[15:12]
-                pc <= pc+1
-                ir <= DATA_IN[11:0]
-        end
-        LDI:
-        begin
-            register_bank[ ir[2:0] ] <= data_in;
-            pc<=pc+1;
-            state <= FETCH;
-        end
-        LD:
-        begin
-            state <= FETCH;
-        end
-
-        ST:
-        begin
-            MEMLD <= 1
-            DATA_OUT <= register_bank[src1]
-            ADDR_OUT <= register_bank[src2]
-            state <= FETCH;
-        end
-        
-        JZ:
-        begin
-            if(ZF)
-                state <= JMP;
-            else
-                state <= FETCH;
-        end
-
-        JMP:
-        begin
-            pc <= pc + DATA_IN
-            state <= FETCH;
-        end
-
-        ALU:
-        begin
-            state <= FETCH;
-        end
-
-        PUSH:
-        begin
-            stack_pointer <= stack_pointer - 1;
-            state <= FETCH;
-        end
-
-        POP1:
-        begin
-            stack_pointer <= stack_pointer + 1;
-            state <= POP2;
-        end
-
-        CALL:
-        begin
-            stack_pointer <= stack_pointer - 1;
-            ADDR_OUT <= stack_pointer;
-            DATA_OUT <= pc;
-            MEMLD = 1
-            state <= JMP;
-        end
-
-        RET1:
-        begin
-            stack_pointer <= stack_pointer + 1;
-            state <= RET2;
-        end
-
-        POP2:
-        begin
-            state <= FETCH;
-        end
-
-        RET2:
-        begin
-            pc <= DATA_IN
-            state <= FETCH;
-        end
-
+module bird (
+		input clk,
+		input [15:0] data_in,
+		output reg [15:0] data_out,
+		output reg [11:0] address,
+		output memwt
+		);
+ 
+reg [11:0] pc, ir; //program counter, instruction register
+ 
+reg [4:0] state; //FSM
+reg [15:0] regbank [7:0];//registers 
+reg zeroflag; //zero flag register
+reg [15:0] result; //output for result
+ 
+ 
+localparam	FETCH=4'b0000,
+		LDI=4'b0001, 
+		LD=4'b0010,
+		ST=4'b0011,
+		JZ=4'b0100,
+		JMP=4'b0101,
+		ALU=4'b0111,
+		PUSH=4'b1000,
+		POP1=4'b1001,
+		POP2=4'b1100,
+		CALL=4'b1010,
+		RET1=4'b1011,
+		RET2=4'b1101;
+ 
+ 
+wire zeroresult; 
+ 
+always @(posedge clk)
+	case(state) 
+		FETCH: 
+			begin
+				if ( data_in[15:12]==JZ) // if instruction is jz  
+					if (zeroflag)  //and if last bit of 7th register is 0 then jump to jump instruction state
+						state <= JMP;
+					else
+						state <= FETCH; //stay here to catch next instruction
+			else
+				state <= data_in[15:12]; //read instruction opcode and jump the state of the instruction to be read
+				ir<=data_in[11:0]; //read instruction details into instruction register
+				pc<=pc+1; //increment program counter
+			end
+ 
+		LDI:
+			begin
+				regbank[ ir[2:0] ] <= data_in; //if inst is LDI get the destination register number from ir and move the data in it.
+				pc<=pc+1; //for next instruction (32 bit instruction)  
+				state <= FETCH;
+			end
+ 
+		LD:
+			begin
+				regbank[ir[2:0]] <= data_in;
+				state <= FETCH;  
+				end 
+ 
+		ST:
+			begin
+				state <= FETCH;  
+			end
+ 
+		JMP:
+			begin
+				pc <= pc+ir;
+				state <= FETCH;  
+			end
+ 
+		ALU:
+			begin
+				regbank[ir[2:0]]<=result;
+				zeroflag<=zeroresult;
+				state <= FETCH;
+			end
+ 
+		PUSH:
+			begin
+				 regbank[7]<=regbank[7]-1;
+				 state <= FETCH;
+			end
+ 
+		POP1:
+			begin
+				//to be added
+			end
+ 
+		POP2: 
+			begin
+				//to be added
+			end
+ 
+		CALL: 
+			begin
+			        //to be added 
+			end
+ 
+		RET1:
+			begin
+				//to be added
+			end
+ 
+		RET2:
+			begin
+				//to be added 
+			end
+ 
+	endcase
+ 
+always @*
+	case (state)
+		LD:	address=regbank[ir[5:3]][11:0];
+		ST:	address=regbank[ir[5:3]][11:0];
+		PUSH:	address=regbank[7];
+		POP2:	//to be added
+		CALL:	//to be added
+		RET2:	//to be added
+		default: address=pc;
+	endcase
+ 
+ 
+assign memwt=(state==ST)|| // to be added
+ 
+always @*
+	case (state)
+		CALL: data_out = //to be added 
+		default: data_out = regbank[ir[8:6]];
+	endcase
+ 
+always @* //ALU Operation
+	case (ir[11:9])
+		3'h0: result = regbank[ir[8:6]]+regbank[ir[5:3]]; //000
+		3'h1: result = regbank[ir[8:6]]-regbank[ir[5:3]]; //001
+		3'h2: result = regbank[ir[8:6]]&regbank[ir[5:3]]; //010
+		3'h3: result = regbank[ir[8:6]]|regbank[ir[5:3]]; //011
+		3'h4: result = regbank[ir[8:6]]^regbank[ir[5:3]]; //100
+		3'h7: case (ir[8:6])
+			3'h0: result = !regbank[ir[5:3]];
+			3'h1: result = regbank[ir[5:3]];
+			3'h2: result = regbank[ir[5:3]]+1;
+			3'h3: result = regbank[ir[5:3]]-1;
+			default: result=16'h0000;
+		     endcase
+		default: result=16'h0000;
+	endcase
+ 
+assign zeroresult = ~|result;
+ 
+initial begin;
+	state=FETCH;
+	zeroflag=0;
+	pc=0;
 end
-
+ 
 endmodule

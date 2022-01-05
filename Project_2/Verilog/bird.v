@@ -85,22 +85,32 @@ always @(posedge clk)
  
 		POP1:
 			begin
-				//to be added
+				 //to be added
+				 regbank[7]<=regbank[7]+1;
+				 state <= FETCH;
+				 
 			end
  
 		POP2: 
 			begin
 				//to be added
+				regbank[ir[2:0]] <= regbank[7];
+				state <= FETCH;
 			end
  
 		CALL: 
 			begin
-			        //to be added 
+			     //to be added 
+				  
+ 				  regbank[7] <= regbank[7] - 1;
+				  state <= FETCH;
 			end
  
 		RET1:
 			begin
 				//to be added
+				regbank[7]<=regbank[7]+1;
+				state <= FETCH;
 			end
  
 		RET2:

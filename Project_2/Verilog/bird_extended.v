@@ -113,7 +113,6 @@ always @(posedge clk)
 			begin
 				state <= FETCH;
 			end
- 
 	endcase
 
 //Determining the ADDR_OUT (ARMUX in logisim)

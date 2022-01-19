@@ -12,30 +12,30 @@ module sevensegment(datain, grounds, display, clk);
 	always @(posedge clk1[15])
 		begin
 			grounds <= {grounds[2:0],grounds[3]};
-			count <= count + 1;
+			count <= count + 2'h1;
 		end
 	
 	always @(posedge clk)
-		clk1 <= clk1 + 1;
+		clk1 <= clk1 + 16'h1;
 	
 	always @(*)
 		case(data[count])	
-			0:display=7'b1111110; //starts with a, ends with g
-			1:display=7'b0110000;
-			2:display=7'b1101101;
-			3:display=7'b1111001;
-			4:display=7'b0110011;
-			5:display=7'b1011011;
-			6:display=7'b1011111;
-			7:display=7'b1110000;
+			0:display=7'b0111111; //starts with a, ends with g
+			1:display=7'b0000110;
+			2:display=7'b1011011;
+			3:display=7'b1001111;
+			4:display=7'b1100110;
+			5:display=7'b1101101;
+			6:display=7'b1111101;
+			7:display=7'b0000111;
 			8:display=7'b1111111;
-			9:display=7'b1111011;
+			9:display=7'b1101111;
 			'ha:display=7'b1110111;
-			'hb:display=7'b0011111;
-			'hc:display=7'b1001110;
-			'hd:display=7'b0111101;
-			'he:display=7'b1001111;
-			'hf:display=7'b1000111;
+			'hb:display=7'b1111100;
+			'hc:display=7'b0111001;
+			'hd:display=7'b1011110;
+			'he:display=7'b1111001;
+			'hf:display=7'b1110001;
 			default display=7'b1111111;
 		endcase
 	

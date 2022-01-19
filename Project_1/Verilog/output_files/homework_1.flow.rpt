@@ -1,5 +1,5 @@
 Flow report for homework_1
-Thu Nov 18 14:58:13 2021
+Sat Jan 15 13:48:05 2022
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -41,15 +41,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Thu Nov 18 14:58:07 2021       ;
+; Flow Status                        ; Successful - Sat Jan 15 13:47:58 2022       ;
 ; Quartus Prime Version              ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                      ; homework_1                                  ;
 ; Top-level Entity Name              ; homework_1                                  ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE22F17C6                                ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 2,981 / 22,320 ( 13 % )                     ;
-;     Total combinational functions  ; 2,138 / 22,320 ( 10 % )                     ;
+; Total logic elements               ; 2,955 / 22,320 ( 13 % )                     ;
+;     Total combinational functions  ; 2,135 / 22,320 ( 10 % )                     ;
 ;     Dedicated logic registers      ; 2,222 / 22,320 ( 10 % )                     ;
 ; Total registers                    ; 2222                                        ;
 ; Total pins                         ; 14 / 154 ( 9 % )                            ;
@@ -65,7 +65,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/18/2021 14:57:09 ;
+; Start date & time ; 01/15/2022 13:46:14 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; homework_1          ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 136935928512232.163723662910728        ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 187880331282220.164224357404932        ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
 ; NOMINAL_CORE_SUPPLY_VOLTAGE         ; 1.2V                                   ; --            ; --          ; --         ;
@@ -92,11 +92,11 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:00:18     ; 1.0                     ; 4817 MB             ; 00:00:31                           ;
-; Fitter               ; 00:00:34     ; 1.1                     ; 5726 MB             ; 00:00:49                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4725 MB             ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:05     ; 1.4                     ; 4842 MB             ; 00:00:05                           ;
-; Total                ; 00:00:59     ; --                      ; --                  ; 00:01:27                           ;
+; Analysis & Synthesis ; 00:00:28     ; 1.0                     ; 4875 MB             ; 00:00:51                           ;
+; Fitter               ; 00:01:09     ; 1.1                     ; 5925 MB             ; 00:01:32                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 4728 MB             ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:06     ; 1.5                     ; 4876 MB             ; 00:00:06                           ;
+; Total                ; 00:01:46     ; --                      ; --                  ; 00:02:31                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -105,10 +105,10 @@ https://fpgasoftware.intel.com/eula.
 +----------------------+------------------+------------+------------+----------------+
 ; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +----------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis ; DESKTOP-9PD6CTC  ; Windows 10 ; 10.0       ; x86_64         ;
-; Fitter               ; DESKTOP-9PD6CTC  ; Windows 10 ; 10.0       ; x86_64         ;
-; Assembler            ; DESKTOP-9PD6CTC  ; Windows 10 ; 10.0       ; x86_64         ;
-; Timing Analyzer      ; DESKTOP-9PD6CTC  ; Windows 10 ; 10.0       ; x86_64         ;
+; Analysis & Synthesis ; e595             ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; e595             ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; e595             ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; e595             ; Windows 10 ; 10.0       ; x86_64         ;
 +----------------------+------------------+------------+------------+----------------+
 
 

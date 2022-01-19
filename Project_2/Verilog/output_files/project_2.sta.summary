@@ -1,0 +1,149 @@
+------------------------------------------------------------
+Timing Analyzer Summary
+------------------------------------------------------------
+
+Type  : Slow 1200mV 85C Model Setup 'CLK'
+Slack : -11.766
+TNS   : -146084.421
+
+Type  : Slow 1200mV 85C Model Setup 'bird_extended:br1|ir[3]'
+Slack : -11.043
+TNS   : -168.615
+
+Type  : Slow 1200mV 85C Model Setup 'keypad:kp1|clk1[14]'
+Slack : -1.263
+TNS   : -30.713
+
+Type  : Slow 1200mV 85C Model Setup 'sevensegment:ss1|clk1[15]'
+Slack : 0.174
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'bird_extended:br1|ir[3]'
+Slack : -4.102
+TNS   : -48.592
+
+Type  : Slow 1200mV 85C Model Hold 'CLK'
+Slack : -0.143
+TNS   : -0.143
+
+Type  : Slow 1200mV 85C Model Hold 'sevensegment:ss1|clk1[15]'
+Slack : 0.357
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'keypad:kp1|clk1[14]'
+Slack : 0.378
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'CLK'
+Slack : -3.000
+TNS   : -16601.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'bird_extended:br1|ir[3]'
+Slack : -1.251
+TNS   : -111.025
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'keypad:kp1|clk1[14]'
+Slack : -1.000
+TNS   : -76.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'sevensegment:ss1|clk1[15]'
+Slack : -1.000
+TNS   : -6.000
+
+Type  : Slow 1200mV 0C Model Setup 'CLK'
+Slack : -10.500
+TNS   : -130252.508
+
+Type  : Slow 1200mV 0C Model Setup 'bird_extended:br1|ir[3]'
+Slack : -9.873
+TNS   : -149.892
+
+Type  : Slow 1200mV 0C Model Setup 'keypad:kp1|clk1[14]'
+Slack : -1.031
+TNS   : -23.402
+
+Type  : Slow 1200mV 0C Model Setup 'sevensegment:ss1|clk1[15]'
+Slack : 0.253
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'bird_extended:br1|ir[3]'
+Slack : -3.632
+TNS   : -42.552
+
+Type  : Slow 1200mV 0C Model Hold 'CLK'
+Slack : -0.128
+TNS   : -0.128
+
+Type  : Slow 1200mV 0C Model Hold 'sevensegment:ss1|clk1[15]'
+Slack : 0.312
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'keypad:kp1|clk1[14]'
+Slack : 0.342
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'CLK'
+Slack : -3.000
+TNS   : -16601.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'bird_extended:br1|ir[3]'
+Slack : -1.050
+TNS   : -91.806
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'keypad:kp1|clk1[14]'
+Slack : -1.000
+TNS   : -76.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'sevensegment:ss1|clk1[15]'
+Slack : -1.000
+TNS   : -6.000
+
+Type  : Fast 1200mV 0C Model Setup 'CLK'
+Slack : -6.528
+TNS   : -78269.856
+
+Type  : Fast 1200mV 0C Model Setup 'bird_extended:br1|ir[3]'
+Slack : -6.204
+TNS   : -93.215
+
+Type  : Fast 1200mV 0C Model Setup 'keypad:kp1|clk1[14]'
+Slack : -0.277
+TNS   : -3.674
+
+Type  : Fast 1200mV 0C Model Setup 'sevensegment:ss1|clk1[15]'
+Slack : 0.533
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'bird_extended:br1|ir[3]'
+Slack : -2.396
+TNS   : -29.140
+
+Type  : Fast 1200mV 0C Model Hold 'CLK'
+Slack : -0.304
+TNS   : -0.399
+
+Type  : Fast 1200mV 0C Model Hold 'sevensegment:ss1|clk1[15]'
+Slack : 0.186
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'keypad:kp1|clk1[14]'
+Slack : 0.196
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'CLK'
+Slack : -3.000
+TNS   : -17923.020
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'keypad:kp1|clk1[14]'
+Slack : -1.000
+TNS   : -76.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'sevensegment:ss1|clk1[15]'
+Slack : -1.000
+TNS   : -6.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'bird_extended:br1|ir[3]'
+Slack : -0.539
+TNS   : -34.129
+
+------------------------------------------------------------

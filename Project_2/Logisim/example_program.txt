@@ -29,7 +29,7 @@ pin1in		ldi 2 0xFFF0	//Write Pin_1 data into reg_2
 			call disp		//display data
 			jmp pb1wait		//go to pb1zero
 
-pin2in			ldi 2 0xFFF2	//Write Pin_2 data into reg_2
+pin2in		ldi 2 0xFFF2	//Write Pin_2 data into reg_2
 			ld 2 2			
 			mov 4 0			//Copy reg_0 into reg_4
 			mov 5 2			//Copy reg_2 into reg_5
@@ -62,7 +62,7 @@ mult	    call lt				//Checks if reg_4 is less than reg_5
             jz mult_start		//If it is not continue
             ldi 6 0             //Load zero to reg_6
             call swap			//Else swap the number in order to optimize (descripted at the end of the function)
-mult_start	add 5 5 5
+mult_start	and 5 5 5
 			jz mult_end			//If reg_5 is zero ends the function
 mult_loop	add 6 6 4           //Add reg_4 to reg_6 our objective in here is the add reg_4 to reg_6 reg_5 times.
 	        dec 5               //Decrease reg_5

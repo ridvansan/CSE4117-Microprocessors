@@ -41,10 +41,10 @@ always @(*)
 
   always @*
     begin
-    data[0]=datain[15:12];
-    data[1]=datain[11:8];
-    data[2]=datain[7:4];
-    data[3]=datain[3:0];
+    data[3]=datain[15:12];
+    data[2]=datain[11:8];
+    data[1]=datain[7:4];
+    data[0]=datain[3:0];
     end
 
 initial begin

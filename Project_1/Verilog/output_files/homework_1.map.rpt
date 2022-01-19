@@ -1,5 +1,5 @@
 Analysis & Synthesis report for homework_1
-Thu Nov 18 14:57:28 2021
+Sat Jan 15 13:46:42 2022
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -47,13 +47,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu Nov 18 14:57:28 2021       ;
+; Analysis & Synthesis Status        ; Successful - Sat Jan 15 13:46:42 2022       ;
 ; Quartus Prime Version              ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                      ; homework_1                                  ;
 ; Top-level Entity Name              ; homework_1                                  ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 4,061                                       ;
-;     Total combinational functions  ; 2,138                                       ;
+; Total logic elements               ; 4,058                                       ;
+;     Total combinational functions  ; 2,135                                       ;
 ;     Dedicated logic registers      ; 2,222                                       ;
 ; Total registers                    ; 2222                                        ;
 ; Total pins                         ; 14                                          ;
@@ -155,32 +155,34 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
-; Number detected on machine ; 6           ;
-; Maximum allowed            ; 6           ;
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 8           ;
 ;                            ;             ;
 ; Average used               ; 1.01        ;
-; Maximum used               ; 6           ;
+; Maximum used               ; 8           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processor 2            ;   0.2%      ;
+;     Processor 2            ;   0.1%      ;
 ;     Processor 3            ;   0.1%      ;
 ;     Processor 4            ;   0.1%      ;
 ;     Processor 5            ;   0.1%      ;
 ;     Processor 6            ;   0.1%      ;
+;     Processor 7            ;   0.1%      ;
+;     Processor 8            ;   0.1%      ;
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                       ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                   ; Library ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+---------+
-; reptile.v                        ; yes             ; User Verilog HDL File        ; C:/Users/ayse/Documents/okul/microp/homework_1/reptile.v       ;         ;
-; seven_segment.v                  ; yes             ; User Verilog HDL File        ; C:/Users/ayse/Documents/okul/microp/homework_1/seven_segment.v ;         ;
-; homework_1.v                     ; yes             ; User Verilog HDL File        ; C:/Users/ayse/Documents/okul/microp/homework_1/homework_1.v    ;         ;
-; ram.dat                          ; yes             ; Auto-Found Unspecified File  ; C:/Users/ayse/Documents/okul/microp/homework_1/ram.dat         ;         ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                            ; Library ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
+; reptile.v                        ; yes             ; User Verilog HDL File        ; C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/reptile.v       ;         ;
+; seven_segment.v                  ; yes             ; User Verilog HDL File        ; C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/seven_segment.v ;         ;
+; homework_1.v                     ; yes             ; User Verilog HDL File        ; C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/homework_1.v    ;         ;
+; ram.dat                          ; yes             ; Auto-Found Unspecified File  ; C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/ram.dat         ;         ;
++----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------+
@@ -188,16 +190,16 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 4,061     ;
+; Estimated Total logic elements              ; 4,058     ;
 ;                                             ;           ;
-; Total combinational functions               ; 2138      ;
+; Total combinational functions               ; 2135      ;
 ; Logic element usage by number of LUT inputs ;           ;
 ;     -- 4 input functions                    ; 1637      ;
-;     -- 3 input functions                    ; 184       ;
+;     -- 3 input functions                    ; 181       ;
 ;     -- <=2 input functions                  ; 317       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 2102      ;
+;     -- normal mode                          ; 2099      ;
 ;     -- arithmetic mode                      ; 36        ;
 ;                                             ;           ;
 ; Total registers                             ; 2222      ;
@@ -210,7 +212,7 @@ https://fpgasoftware.intel.com/eula.
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
 ; Maximum fan-out                             ; 2216      ;
-; Total fan-out                               ; 14172     ;
+; Total fan-out                               ; 14163     ;
 ; Average fan-out                             ; 3.23      ;
 +---------------------------------------------+-----------+
 
@@ -220,8 +222,8 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+---------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name           ; Entity Name   ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+---------------+--------------+
-; |homework_1                ; 2138 (1735)         ; 2222 (2048)               ; 0           ; 0            ; 0       ; 0         ; 14   ; 0            ; |homework_1                   ; homework_1    ; work         ;
-;    |reptile:rr1|           ; 368 (368)           ; 152 (152)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |homework_1|reptile:rr1       ; reptile       ; work         ;
+; |homework_1                ; 2135 (1735)         ; 2222 (2048)               ; 0           ; 0            ; 0       ; 0         ; 14   ; 0            ; |homework_1                   ; homework_1    ; work         ;
+;    |reptile:rr1|           ; 365 (365)           ; 152 (152)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |homework_1|reptile:rr1       ; reptile       ; work         ;
 ;    |seven_segment:ss1|     ; 35 (35)             ; 22 (22)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |homework_1|seven_segment:ss1 ; seven_segment ; work         ;
 +----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------+---------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -279,13 +281,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; 17:1               ; 16 bits   ; 176 LEs       ; 16 LEs               ; 160 LEs                ; Yes        ; |homework_1|reptile:rr1|regbank[3][12] ;
 ; 17:1               ; 16 bits   ; 176 LEs       ; 16 LEs               ; 160 LEs                ; Yes        ; |homework_1|reptile:rr1|regbank[2][7]  ;
 ; 17:1               ; 16 bits   ; 176 LEs       ; 16 LEs               ; 160 LEs                ; Yes        ; |homework_1|reptile:rr1|regbank[1][10] ;
-; 17:1               ; 16 bits   ; 176 LEs       ; 16 LEs               ; 160 LEs                ; Yes        ; |homework_1|reptile:rr1|regbank[0][12] ;
+; 17:1               ; 16 bits   ; 176 LEs       ; 16 LEs               ; 160 LEs                ; Yes        ; |homework_1|reptile:rr1|regbank[0][0]  ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |homework_1|seven_segment:ss1|Mux1     ;
 ; 8:1                ; 16 bits   ; 80 LEs        ; 80 LEs               ; 0 LEs                  ; No         ; |homework_1|reptile:rr1|Mux15          ;
 ; 8:1                ; 16 bits   ; 80 LEs        ; 80 LEs               ; 0 LEs                  ; No         ; |homework_1|reptile:rr1|Mux11          ;
 ; 4:1                ; 12 bits   ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |homework_1|reptile:rr1|Add2           ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |homework_1|reptile:rr1|Add2           ;
-; 12:1               ; 15 bits   ; 120 LEs       ; 60 LEs               ; 60 LEs                 ; No         ; |homework_1|reptile:rr1|Mux58          ;
+; 12:1               ; 15 bits   ; 120 LEs       ; 60 LEs               ; 60 LEs                 ; No         ; |homework_1|reptile:rr1|Mux54          ;
 ; 4:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; No         ; |homework_1|reptile:rr1|Add2           ;
 ; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; No         ; |homework_1|reptile:rr1|Add2           ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
@@ -309,18 +311,18 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; cycloneiii_ff         ; 2222                        ;
 ;     ENA               ; 2196                        ;
 ;     plain             ; 26                          ;
-; cycloneiii_lcell_comb ; 2147                        ;
+; cycloneiii_lcell_comb ; 2144                        ;
 ;     arith             ; 36                          ;
 ;         2 data inputs ; 13                          ;
 ;         3 data inputs ; 23                          ;
-;     normal            ; 2111                        ;
+;     normal            ; 2108                        ;
 ;         1 data inputs ; 237                         ;
 ;         2 data inputs ; 76                          ;
-;         3 data inputs ; 161                         ;
+;         3 data inputs ; 158                         ;
 ;         4 data inputs ; 1637                        ;
 ;                       ;                             ;
 ; Max LUT depth         ; 13.00                       ;
-; Average LUT depth     ; 8.02                        ;
+; Average LUT depth     ; 8.24                        ;
 +-----------------------+-----------------------------+
 
 
@@ -329,7 +331,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:07     ;
+; Top            ; 00:00:10     ;
 +----------------+--------------+
 
 
@@ -339,43 +341,43 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Thu Nov 18 14:57:09 2021
+    Info: Processing started: Sat Jan 15 13:46:13 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off homework_1 -c homework_1
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 6 of the 6 processors detected
+Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file reptile.v
-    Info (12023): Found entity 1: reptile File: C:/Users/ayse/Documents/okul/microp/homework_1/reptile.v Line: 5
+    Info (12023): Found entity 1: reptile File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/reptile.v Line: 5
 Info (12021): Found 1 design units, including 1 entities, in source file seven_segment.v
-    Info (12023): Found entity 1: seven_segment File: C:/Users/ayse/Documents/okul/microp/homework_1/seven_segment.v Line: 1
+    Info (12023): Found entity 1: seven_segment File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/seven_segment.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file homework_1.v
-    Info (12023): Found entity 1: homework_1 File: C:/Users/ayse/Documents/okul/microp/homework_1/homework_1.v Line: 3
+    Info (12023): Found entity 1: homework_1 File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/homework_1.v Line: 3
 Info (12127): Elaborating entity "homework_1" for the top level hierarchy
-Warning (10850): Verilog HDL warning at homework_1.v(39): number of words (49) in memory file does not match the number of elements in the address range [0:127] File: C:/Users/ayse/Documents/okul/microp/homework_1/homework_1.v Line: 39
-Info (12128): Elaborating entity "reptile" for hierarchy "reptile:rr1" File: C:/Users/ayse/Documents/okul/microp/homework_1/homework_1.v Line: 26
-Warning (10230): Verilog HDL assignment warning at reptile.v(46): truncated value with size 32 to match size of target (12) File: C:/Users/ayse/Documents/okul/microp/homework_1/reptile.v Line: 46
-Warning (10230): Verilog HDL assignment warning at reptile.v(52): truncated value with size 32 to match size of target (12) File: C:/Users/ayse/Documents/okul/microp/homework_1/reptile.v Line: 52
-Warning (10230): Verilog HDL assignment warning at reptile.v(105): truncated value with size 32 to match size of target (16) File: C:/Users/ayse/Documents/okul/microp/homework_1/reptile.v Line: 105
-Warning (10230): Verilog HDL assignment warning at reptile.v(106): truncated value with size 32 to match size of target (16) File: C:/Users/ayse/Documents/okul/microp/homework_1/reptile.v Line: 106
-Info (12128): Elaborating entity "seven_segment" for hierarchy "seven_segment:ss1" File: C:/Users/ayse/Documents/okul/microp/homework_1/homework_1.v Line: 28
-Warning (10230): Verilog HDL assignment warning at seven_segment.v(15): truncated value with size 32 to match size of target (2) File: C:/Users/ayse/Documents/okul/microp/homework_1/seven_segment.v Line: 15
-Warning (10230): Verilog HDL assignment warning at seven_segment.v(19): truncated value with size 32 to match size of target (26) File: C:/Users/ayse/Documents/okul/microp/homework_1/seven_segment.v Line: 19
+Warning (10850): Verilog HDL warning at homework_1.v(40): number of words (49) in memory file does not match the number of elements in the address range [0:127] File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/homework_1.v Line: 40
+Info (12128): Elaborating entity "reptile" for hierarchy "reptile:rr1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/homework_1.v Line: 27
+Warning (10230): Verilog HDL assignment warning at reptile.v(46): truncated value with size 32 to match size of target (12) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/reptile.v Line: 46
+Warning (10230): Verilog HDL assignment warning at reptile.v(52): truncated value with size 32 to match size of target (12) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/reptile.v Line: 52
+Warning (10230): Verilog HDL assignment warning at reptile.v(105): truncated value with size 32 to match size of target (16) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/reptile.v Line: 105
+Warning (10230): Verilog HDL assignment warning at reptile.v(106): truncated value with size 32 to match size of target (16) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/reptile.v Line: 106
+Info (12128): Elaborating entity "seven_segment" for hierarchy "seven_segment:ss1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/homework_1.v Line: 29
+Warning (10230): Verilog HDL assignment warning at seven_segment.v(15): truncated value with size 32 to match size of target (2) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/seven_segment.v Line: 15
+Warning (10230): Verilog HDL assignment warning at seven_segment.v(19): truncated value with size 32 to match size of target (26) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/seven_segment.v Line: 19
 Info (276014): Found 1 instances of uninferred RAM logic
-    Info (276007): RAM logic "memory" is uninferred due to asynchronous read logic File: C:/Users/ayse/Documents/okul/microp/homework_1/homework_1.v Line: 12
-Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/ayse/Documents/okul/microp/homework_1/db/homework_1.ram0_homework_1_24b6ce66.hdl.mif" contains "don't care" values -- overwriting them with 0s
+    Info (276007): RAM logic "memory" is uninferred due to asynchronous read logic File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/homework_1.v Line: 12
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/db/homework_1.ram0_homework_1_24b6ce66.hdl.mif" contains "don't care" values -- overwriting them with 0s
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 10 registers lost all their fanouts during netlist optimizations.
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
 Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "pushbutton" File: C:/Users/ayse/Documents/okul/microp/homework_1/homework_1.v Line: 5
-Info (21057): Implemented 4119 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "pushbutton" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_1/Verilog/homework_1.v Line: 5
+Info (21057): Implemented 4116 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 2 input pins
     Info (21059): Implemented 12 output pins
-    Info (21061): Implemented 4105 logic cells
+    Info (21061): Implemented 4102 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 11 warnings
-    Info: Peak virtual memory: 4817 megabytes
-    Info: Processing ended: Thu Nov 18 14:57:28 2021
-    Info: Elapsed time: 00:00:19
-    Info: Total CPU time (on all processors): 00:00:32
+    Info: Peak virtual memory: 4875 megabytes
+    Info: Processing ended: Sat Jan 15 13:46:42 2022
+    Info: Elapsed time: 00:00:29
+    Info: Total CPU time (on all processors): 00:00:52
 
 

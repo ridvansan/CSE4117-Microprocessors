@@ -1,18 +1,18 @@
 |homework_1
-grounds[0] <= seven_segment:ss1.grounds
-grounds[1] <= seven_segment:ss1.grounds
-grounds[2] <= seven_segment:ss1.grounds
-grounds[3] <= seven_segment:ss1.grounds
-display[0] <= seven_segment:ss1.display
-display[1] <= seven_segment:ss1.display
-display[2] <= seven_segment:ss1.display
-display[3] <= seven_segment:ss1.display
-display[4] <= seven_segment:ss1.display
-display[5] <= seven_segment:ss1.display
-display[6] <= seven_segment:ss1.display
+grounds[0] << seven_segment:ss1.grounds
+grounds[1] << seven_segment:ss1.grounds
+grounds[2] << seven_segment:ss1.grounds
+grounds[3] << seven_segment:ss1.grounds
+display[0] << seven_segment:ss1.display
+display[1] << seven_segment:ss1.display
+display[2] << seven_segment:ss1.display
+display[3] << seven_segment:ss1.display
+display[4] << seven_segment:ss1.display
+display[5] << seven_segment:ss1.display
+display[6] << seven_segment:ss1.display
 clk => clk.IN1
 pushbutton => ~NO_FANOUT~
-led <= reptile:rr1.memwt
+led << reptile:rr1.memwt
 
 
 |homework_1|reptile:rr1
@@ -370,22 +370,22 @@ reg0[15] <= regbank[0][15].DB_MAX_OUTPUT_PORT_TYPE
 
 
 |homework_1|seven_segment:ss1
-datain[0] => Mux3.IN0
-datain[1] => Mux2.IN0
-datain[2] => Mux1.IN0
-datain[3] => Mux0.IN0
-datain[4] => Mux3.IN1
-datain[5] => Mux2.IN1
-datain[6] => Mux1.IN1
-datain[7] => Mux0.IN1
-datain[8] => Mux3.IN2
-datain[9] => Mux2.IN2
-datain[10] => Mux1.IN2
-datain[11] => Mux0.IN2
-datain[12] => Mux3.IN3
-datain[13] => Mux2.IN3
-datain[14] => Mux1.IN3
-datain[15] => Mux0.IN3
+datain[0] => Mux3.IN3
+datain[1] => Mux2.IN3
+datain[2] => Mux1.IN3
+datain[3] => Mux0.IN3
+datain[4] => Mux3.IN2
+datain[5] => Mux2.IN2
+datain[6] => Mux1.IN2
+datain[7] => Mux0.IN2
+datain[8] => Mux3.IN1
+datain[9] => Mux2.IN1
+datain[10] => Mux1.IN1
+datain[11] => Mux0.IN1
+datain[12] => Mux3.IN0
+datain[13] => Mux2.IN0
+datain[14] => Mux1.IN0
+datain[15] => Mux0.IN0
 grounds[0] <= grounds[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 grounds[1] <= grounds[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
 grounds[2] <= grounds[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE

@@ -1,12 +1,12 @@
-Fitter Status : Successful - Thu Nov 18 14:58:03 2021
+Fitter Status : Successful - Sat Jan 15 13:47:52 2022
 Quartus Prime Version : 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 Revision Name : homework_1
 Top-level Entity Name : homework_1
 Family : Cyclone IV E
 Device : EP4CE22F17C6
 Timing Models : Final
-Total logic elements : 2,981 / 22,320 ( 13 % )
-    Total combinational functions : 2,138 / 22,320 ( 10 % )
+Total logic elements : 2,955 / 22,320 ( 13 % )
+    Total combinational functions : 2,135 / 22,320 ( 10 % )
     Dedicated logic registers : 2,222 / 22,320 ( 10 % )
 Total registers : 2222
 Total pins : 14 / 154 ( 9 % )

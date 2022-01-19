@@ -16,12 +16,12 @@ reg [11:0] rowpressed_buffer0, rowpressed_buffer1, rowpressed_buffer2, rowpresse
 reg [3:0] rowpressed_debounced;
 
 always @(posedge clk)
-	clk1<=clk1+1;
+	clk1<=clk1+16'h1;
 
-always @(posedge clk1[15])
+always @(posedge clk1[14])
 	rowwrite<={rowwrite[2:0], rowwrite[3]};
 
-always @(posedge clk1[15])
+always @(posedge clk1[14])
 	if (rowwrite== 4'b1110)
 		begin
 			rowpressed[0]<= ~(&colread); //colread=1111--> none of them pressed, colread=1110 --> 1, colread=1101-->2, 1011-->3, 0111->A
@@ -68,7 +68,7 @@ assign transition3_10=~|rowpressed_buffer3; //kpd=1-->0
 assign transition3_01=&rowpressed_buffer3;  //kpd=0-->1
 
 
-always @(posedge clk1[15])
+always @(posedge clk1[14])
 	begin
 		rowpressed_buffer0<= {rowpressed_buffer0[10:0],rowpressed[0]};
 		if (rowpressed_debounced[0]==0 && transition0_01)
@@ -149,7 +149,7 @@ always @*
 	end //always
 
 
-assign keypressed= rowpressed_debounced[0]||rowpressed_debounced[1]||rowpressed_debounced[2]||rowpressed_debounced[3];
+assign keypressed= |rowpressed_debounced;
 
 reg [1:0] keypressed_buffer; //yeni karakter için parmağı çekip tekrar basmamız için gerekli
 
@@ -157,13 +157,13 @@ always @(posedge clk)
 	keypressed_buffer<={keypressed_buffer[0],keypressed};
 
 always @(posedge clk)
-	if ((keypressed_buffer==2'b01)&&(ready==0))
+	if((keypressed_buffer==2'b01)&&(ready==0))
 		begin
 			data<=keyread;
 			ready<=1;
 		end
-	else if ((ack==1)&&(ready==1))
-		ready<=0;
+	else if (ack==1)
+			ready<=0;
 	
 always @(*)
 	if (statusordata==1)
@@ -175,5 +175,12 @@ initial
 	begin
 		rowwrite=4'b1110;		
 		ready=0;
+		clk1 = 0;
+		keypressed_buffer = 2'b00;
+		rowpressed_debounced = 4'b0000;
+		rowpressed_buffer0 = 12'h000;
+		rowpressed_buffer1 = 12'h000;
+		rowpressed_buffer2 = 12'h000;
+		rowpressed_buffer3 = 12'h000;
 	end
 endmodule

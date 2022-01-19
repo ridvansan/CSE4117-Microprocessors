@@ -19,11 +19,12 @@ module homework_1 (grounds, display, clk, pushbutton,led);
     wire     memwt;
  
     wire     [15:0] reg0;
+
  
  assign led=memwt; //check memory write signal works or not. For debugging 
  
     //instantiation of cpu
-  reptile rr1 (.data_in(data_in), .data_out(data_out), .clk(~clk), .memwt(memwt), .address(address),.reg0(reg0));
+	 reptile rr1 (.data_in(data_in), .data_out(data_out), .clk(~clk), .memwt(memwt), .address(address),.reg0(reg0));
     //instantiation of seven segment
     seven_segment ss1 (.grounds(grounds), .display(display), .clk(clk),  .datain(reg0));
     

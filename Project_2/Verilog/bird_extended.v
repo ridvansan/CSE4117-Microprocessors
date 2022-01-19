@@ -31,27 +31,18 @@ localparam	FETCH=4'b0000,
  
  
 wire zeroresult;
-assign sp = regbank[7]
-
 always @(posedge clk)
 	case(state) 
 		FETCH: 
 			begin
-				if ( data_in[15:12]==JZ) // if instruction is jz  
-					if (zeroflag)  //and if last bit of 7th register is 0 then jump to jump instruction state
-						state <= JMP;
-					else
-						state <= FETCH; //stay here to catch next instruction
-			else
 				state <= data_in[15:12]; //read instruction opcode and jump the state of the instruction to be read
 				ir<=data_in[11:0]; //read instruction details into instruction register
-				pc<=pc+1; //increment program counter
+				pc<=pc+16'h1; //increment program counter
 			end
- 
 		LDI:
 			begin
 				regbank[ir[2:0]] <= data_in; //if inst is LDI get the destination register number from ir and move the data in it.
-				pc<=pc+1; //for next instruction (32 bit instruction)  
+				pc<=pc+16'h1; //for next instruction (32 bit instruction)  
 				state <= FETCH;
 			end
  
@@ -59,13 +50,26 @@ always @(posedge clk)
 			begin
 				regbank[ir[2:0]] <= data_in;
 				state <= FETCH;  
-				end 
+			end 
  
 		ST:
 			begin
-				state <= FETCH;  
+				state <= FETCH;
 			end
- 
+		
+		JZ:
+			begin
+				if(zeroflag)
+					begin
+						state <= JMP;
+					end
+				else
+					begin
+						pc<=pc+16'h1; //increment program counter
+						state <= FETCH;
+					end
+			end
+		
 		JMP:
 			begin
 				pc <= pc + data_in;
@@ -81,13 +85,13 @@ always @(posedge clk)
  
 		PUSH:
 			begin
-				 sp <= sp - 1;
+				 regbank[7] <= regbank[7] - 16'h1;
 				 state <= FETCH;
 			end
  
 		POP1:
 			begin
-				sp <= sp + 1;
+				regbank[7] <= regbank[7] + 16'h1;
 				state <= POP2;
 			end
  
@@ -99,17 +103,22 @@ always @(posedge clk)
  
 		CALL: 
 			begin
-			    sp <= sp - 1;
+				regbank[7] <= regbank[7] - 16'h1;
 				state <= JMP;
 			end
  
 		RET1:
 			begin
-				sp <= sp + 1;
+				regbank[7] <= regbank[7] + 16'h1;
 				state <= RET2;
 			end
  
 		RET2:
+			begin
+				pc <= data_in;
+				state <= FETCH;
+			end
+		default:
 			begin
 				state <= FETCH;
 			end
@@ -118,30 +127,23 @@ always @(posedge clk)
 //Determining the ADDR_OUT (ARMUX in logisim)
 always @* //ADDR_OUT
 	case (state)
-		LD:     address=regbank[ir[5:3]][15:0];
-		ST:	    address=regbank[ir[5:3]][15:0];
-		PUSH:	address=sp;
-		CALL:	address=sp;
-		POP2:	address=sp;
-		RET2:	address=sp;
+		LD:   address=regbank[ir[5:3]];
+		ST:	address=regbank[ir[5:3]];
+		PUSH:	address=regbank[7];
+		POP2:	address=regbank[7];
+		RET2:	address=regbank[7];
+		CALL: address=regbank[7];
 		default: address=pc;
 	endcase
  
 //Memory load operands
-assign memld = (state==ST) || (state == CALL) || (state == PUSH)
+assign memld = (state==ST) || (state == CALL) || (state == PUSH);
 
-//Determining the DATA_OUT (DATAMUX in logisim)
+
 always @*
-	case (state)
+	case(state)
 		CALL: data_out = pc;
 		default: data_out = regbank[ir[8:6]];
-	endcase
-
-//Determining the PC input (PCMUX in logisim)
-always @*
-	case (state)
-		RET2: pc = data_in;
-		default: pc = pc + 1; //Can cause error.
 	endcase
 
 
@@ -155,13 +157,12 @@ always @* //ALU Operation
 		3'h7: case (ir[8:6])
 			3'h0: result = !regbank[ir[5:3]];
 			3'h1: result = regbank[ir[5:3]];
-			3'h2: result = regbank[ir[5:3]]+1;
-			3'h3: result = regbank[ir[5:3]]-1;
+			3'h2: result = regbank[ir[5:3]]+16'h1;
+			3'h3: result = regbank[ir[5:3]]-16'h1;
 			default: result=16'h0000;
 		     endcase
 		default: result=16'h0000;
 	endcase
-
 assign zeroresult = ~|result;
  
 initial begin;
@@ -169,5 +170,6 @@ initial begin;
 	zeroflag=0;
 	pc=0;
 end
+ 
  
 endmodule

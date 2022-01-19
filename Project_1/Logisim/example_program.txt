@@ -1,5 +1,5 @@
 .data
-	TERMS: 6
+	TERMS: 7
 	isOdd: 0
 	temp: 0
 	result: 0

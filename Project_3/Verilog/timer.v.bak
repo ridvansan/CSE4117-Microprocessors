@@ -1,0 +1,24 @@
+module timer    (
+                input clk,
+                output reg timer_int_signal,
+                output reg [15:0] time
+                );
+
+localparam tickrate = 32'h2FAF080; //tickrate for 50mhz.
+reg [32:0] tick;
+
+
+always @(posedge clk) begin
+    tick = tick + 1;
+end
+
+always @(tick[31]) begin
+    time = time + 1;
+end
+
+always @(*) begin
+    if( (tick == 1) && (ready == 0))
+        begin
+            
+        end
+end

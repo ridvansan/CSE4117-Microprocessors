@@ -22,7 +22,7 @@ always @(posedge clk) begin
 end
 
 always @(posedge clk) begin
-	if((button == 1) && (ready == 0))
+	if((button == 0) && (ready == 0))
 		begin
 			timee <= time_dat;
 			ready <= 1;

@@ -1,5 +1,5 @@
 Analysis & Synthesis report for project_3
-Sun Jan 30 17:02:41 2022
+Fri Feb  4 13:03:53 2022
 Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
 
 
@@ -13,16 +13,15 @@ Quartus Prime Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Inverted Register Statistics
- 11. Port Connectivity Checks: "bird_extended:br1"
- 12. Port Connectivity Checks: "timer:tm1"
- 13. Port Connectivity Checks: "keypad:kp1"
- 14. Post-Synthesis Netlist Statistics for Top Partition
- 15. Elapsed Time Per Partition
- 16. Analysis & Synthesis Messages
- 17. Analysis & Synthesis Suppressed Messages
+  8. User-Specified and Inferred Latches
+  9. Registers Removed During Synthesis
+ 10. General Register Statistics
+ 11. Inverted Register Statistics
+ 12. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 13. Post-Synthesis Netlist Statistics for Top Partition
+ 14. Elapsed Time Per Partition
+ 15. Analysis & Synthesis Messages
+ 16. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -49,15 +48,15 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Jan 30 17:02:41 2022       ;
+; Analysis & Synthesis Status        ; Successful - Fri Feb  4 13:03:52 2022       ;
 ; Quartus Prime Version              ; 21.1.0 Build 842 10/21/2021 SJ Lite Edition ;
 ; Revision Name                      ; project_3                                   ;
 ; Top-level Entity Name              ; main                                        ;
 ; Family                             ; Cyclone IV E                                ;
-; Total logic elements               ; 38                                          ;
-;     Total combinational functions  ; 34                                          ;
-;     Dedicated logic registers      ; 38                                          ;
-; Total registers                    ; 38                                          ;
+; Total logic elements               ; 7,974                                       ;
+;     Total combinational functions  ; 4,531                                       ;
+;     Dedicated logic registers      ; 4,422                                       ;
+; Total registers                    ; 4422                                        ;
 ; Total pins                         ; 21                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
@@ -160,12 +159,18 @@ https://fpgasoftware.intel.com/eula.
 ; Number detected on machine ; 8           ;
 ; Maximum allowed            ; 8           ;
 ;                            ;             ;
-; Average used               ; 1.00        ;
+; Average used               ; 1.04        ;
 ; Maximum used               ; 8           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
-;     Processors 2-8         ;   0.0%      ;
+;     Processor 2            ;   0.8%      ;
+;     Processor 3            ;   0.6%      ;
+;     Processor 4            ;   0.6%      ;
+;     Processor 5            ;   0.5%      ;
+;     Processor 6            ;   0.5%      ;
+;     Processor 7            ;   0.5%      ;
+;     Processor 8            ;   0.5%      ;
 +----------------------------+-------------+
 
 
@@ -188,20 +193,20 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 38        ;
+; Estimated Total logic elements              ; 7,974     ;
 ;                                             ;           ;
-; Total combinational functions               ; 34        ;
+; Total combinational functions               ; 4531      ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 0         ;
-;     -- 3 input functions                    ; 2         ;
-;     -- <=2 input functions                  ; 32        ;
+;     -- 4 input functions                    ; 3156      ;
+;     -- 3 input functions                    ; 462       ;
+;     -- <=2 input functions                  ; 913       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 7         ;
-;     -- arithmetic mode                      ; 27        ;
+;     -- normal mode                          ; 4412      ;
+;     -- arithmetic mode                      ; 119       ;
 ;                                             ;           ;
-; Total registers                             ; 38        ;
-;     -- Dedicated logic registers            ; 38        ;
+; Total registers                             ; 4422      ;
+;     -- Dedicated logic registers            ; 4422      ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 21        ;
@@ -209,35 +214,71 @@ https://fpgasoftware.intel.com/eula.
 ; Embedded Multiplier 9-bit elements          ; 0         ;
 ;                                             ;           ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 30        ;
-; Total fan-out                               ; 168       ;
-; Average fan-out                             ; 1.47      ;
+; Maximum fan-out                             ; 4340      ;
+; Total fan-out                               ; 28256     ;
+; Average fan-out                             ; 3.14      ;
 +---------------------------------------------+-----------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                          ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------+--------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name    ; Entity Name  ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------+--------------+--------------+
-; |main                      ; 34 (0)              ; 38 (0)                    ; 0           ; 0            ; 0       ; 0         ; 21   ; 0            ; |main                  ; main         ; work         ;
-;    |keypad:kp1|            ; 17 (17)             ; 19 (19)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main|keypad:kp1       ; keypad       ; work         ;
-;    |sevensegment:ss1|      ; 17 (17)             ; 19 (19)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main|sevensegment:ss1 ; sevensegment ; work         ;
-+----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+------------------------+--------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                            ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------+---------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name     ; Entity Name   ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------+---------------+--------------+
+; |main                      ; 4531 (3884)         ; 4422 (4112)               ; 0           ; 0            ; 0       ; 0         ; 21   ; 0            ; |main                   ; main          ; work         ;
+;    |bird_extended:br1|     ; 457 (457)           ; 161 (161)                 ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main|bird_extended:br1 ; bird_extended ; work         ;
+;    |keypad:kp1|            ; 83 (83)             ; 98 (98)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main|keypad:kp1        ; keypad        ; work         ;
+;    |sevensegment:ss1|      ; 34 (34)             ; 8 (8)                     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main|sevensegment:ss1  ; sevensegment  ; work         ;
+;    |timer:tm1|             ; 73 (73)             ; 43 (43)                   ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |main|timer:tm1         ; timer         ; work         ;
++----------------------------+---------------------+---------------------------+-------------+--------------+---------+-----------+------+--------------+-------------------------+---------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+-------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                      ;
-+----------------------------------------+--------------------------------+
-; Register name                          ; Reason for Removal             ;
-+----------------------------------------+--------------------------------+
-; sevensegment:ss1|clk1[0]               ; Merged with keypad:kp1|clk1[0] ;
-; sevensegment:ss1|count[0,1]            ; Lost fanout                    ;
-; keypad:kp1|clk1[15..25]                ; Lost fanout                    ;
-; sevensegment:ss1|clk1[16..25]          ; Lost fanout                    ;
-; Total Number of Removed Registers = 24 ;                                ;
-+----------------------------------------+--------------------------------+
++---------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                               ;
++----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
++----------------------------------------------------+---------------------+------------------------+
+; timeorready                                        ; data_in[6]          ; yes                    ;
+; statusordata                                       ; data_in             ; yes                    ;
+; timer_ack                                          ; data_in[6]          ; yes                    ;
+; keypad_ack                                         ; data_in             ; yes                    ;
+; Number of user-specified and inferred latches = 4  ;                     ;                        ;
++----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; bird_extended:br1|state[4]             ; Stuck at GND due to stuck port data_in ;
+; sevensegment:ss1|clk1[0]               ; Merged with keypad:kp1|clk1[0]         ;
+; timer:tm1|tick[0]                      ; Merged with keypad:kp1|clk1[0]         ;
+; timer:tm1|tick[1]                      ; Merged with keypad:kp1|clk1[1]         ;
+; sevensegment:ss1|clk1[1]               ; Merged with keypad:kp1|clk1[1]         ;
+; timer:tm1|tick[2]                      ; Merged with keypad:kp1|clk1[2]         ;
+; sevensegment:ss1|clk1[2]               ; Merged with keypad:kp1|clk1[2]         ;
+; timer:tm1|tick[3]                      ; Merged with keypad:kp1|clk1[3]         ;
+; sevensegment:ss1|clk1[3]               ; Merged with keypad:kp1|clk1[3]         ;
+; timer:tm1|tick[4]                      ; Merged with keypad:kp1|clk1[4]         ;
+; sevensegment:ss1|clk1[4]               ; Merged with keypad:kp1|clk1[4]         ;
+; timer:tm1|tick[5]                      ; Merged with keypad:kp1|clk1[5]         ;
+; sevensegment:ss1|clk1[5]               ; Merged with keypad:kp1|clk1[5]         ;
+; timer:tm1|tick[6]                      ; Merged with keypad:kp1|clk1[6]         ;
+; sevensegment:ss1|clk1[6]               ; Merged with keypad:kp1|clk1[6]         ;
+; sevensegment:ss1|clk1[7]               ; Merged with keypad:kp1|clk1[7]         ;
+; sevensegment:ss1|clk1[8]               ; Merged with keypad:kp1|clk1[8]         ;
+; sevensegment:ss1|clk1[9]               ; Merged with keypad:kp1|clk1[9]         ;
+; sevensegment:ss1|clk1[10]              ; Merged with keypad:kp1|clk1[10]        ;
+; sevensegment:ss1|clk1[11]              ; Merged with keypad:kp1|clk1[11]        ;
+; sevensegment:ss1|clk1[12]              ; Merged with keypad:kp1|clk1[12]        ;
+; sevensegment:ss1|clk1[13]              ; Merged with keypad:kp1|clk1[13]        ;
+; keypad:kp1|clk1[15..25]                ; Lost fanout                            ;
+; sevensegment:ss1|clk1[16..25]          ; Lost fanout                            ;
+; Total Number of Removed Registers = 43 ;                                        ;
++----------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -245,12 +286,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 38    ;
+; Total registers                              ; 4422  ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Synchronous Load   ; 32    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 0     ;
+; Number of registers using Clock Enable       ; 4307  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -260,9 +301,9 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------+---------+
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
-; keypad:kp1|rowwrite[1]                 ; 2       ;
-; keypad:kp1|rowwrite[2]                 ; 2       ;
-; keypad:kp1|rowwrite[3]                 ; 2       ;
+; keypad:kp1|rowwrite[1]                 ; 6       ;
+; keypad:kp1|rowwrite[2]                 ; 6       ;
+; keypad:kp1|rowwrite[3]                 ; 6       ;
 ; sevensegment:ss1|grounds[1]            ; 2       ;
 ; sevensegment:ss1|grounds[2]            ; 2       ;
 ; sevensegment:ss1|grounds[3]            ; 2       ;
@@ -270,36 +311,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------+---------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "bird_extended:br1"                                                                                                                                    ;
-+----------+--------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port     ; Type   ; Severity ; Details                                                                                                                                           ;
-+----------+--------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; data_in  ; Input  ; Warning  ; Input port expression (1 bits) is smaller than the input port (16 bits) it drives.  Extra input bit(s) "data_in[15..1]" will be connected to GND. ;
-; data_out ; Output ; Warning  ; Output or bidir port (16 bits) is wider than the port expression (1 bits) it drives; bit(s) "data_out[15..1]" have no fanouts                     ;
-; data_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                               ;
-; address  ; Output ; Warning  ; Output or bidir port (16 bits) is wider than the port expression (1 bits) it drives; bit(s) "address[15..1]" have no fanouts                      ;
-; address  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                               ;
-; memld    ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                               ;
-+----------+--------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+----------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "timer:tm1"                                                                          ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; Port ; Type   ; Severity ; Details                                                                             ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-; out  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+------+--------+----------+-------------------------------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "keypad:kp1"                                                                           ;
-+--------+--------+----------+-------------------------------------------------------------------------------------+
-; Port   ; Type   ; Severity ; Details                                                                             ;
-+--------+--------+----------+-------------------------------------------------------------------------------------+
-; keyout ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------+--------+----------+-------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
+; 16:1               ; 16 bits   ; 160 LEs       ; 16 LEs               ; 144 LEs                ; Yes        ; |main|bird_extended:br1|regbank[6][7]  ;
+; 16:1               ; 16 bits   ; 160 LEs       ; 16 LEs               ; 144 LEs                ; Yes        ; |main|bird_extended:br1|regbank[5][2]  ;
+; 16:1               ; 16 bits   ; 160 LEs       ; 16 LEs               ; 144 LEs                ; Yes        ; |main|bird_extended:br1|regbank[4][1]  ;
+; 16:1               ; 16 bits   ; 160 LEs       ; 16 LEs               ; 144 LEs                ; Yes        ; |main|bird_extended:br1|regbank[3][14] ;
+; 16:1               ; 16 bits   ; 160 LEs       ; 16 LEs               ; 144 LEs                ; Yes        ; |main|bird_extended:br1|regbank[2][9]  ;
+; 16:1               ; 16 bits   ; 160 LEs       ; 16 LEs               ; 144 LEs                ; Yes        ; |main|bird_extended:br1|regbank[1][11] ;
+; 16:1               ; 16 bits   ; 160 LEs       ; 16 LEs               ; 144 LEs                ; Yes        ; |main|bird_extended:br1|regbank[0][13] ;
+; 9:1                ; 16 bits   ; 96 LEs        ; 16 LEs               ; 80 LEs                 ; Yes        ; |main|bird_extended:br1|pc[12]         ;
+; 11:1               ; 16 bits   ; 112 LEs       ; 32 LEs               ; 80 LEs                 ; Yes        ; |main|bird_extended:br1|regbank[7][8]  ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |main|sevensegment:ss1|Mux1            ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 80 LEs               ; 0 LEs                  ; No         ; |main|bird_extended:br1|Mux37          ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 80 LEs               ; 0 LEs                  ; No         ; |main|bird_extended:br1|Mux30          ;
+; 5:1                ; 12 bits   ; 36 LEs        ; 24 LEs               ; 12 LEs                 ; No         ; |main|data_in[6]                       ;
+; 5:1                ; 3 bits    ; 9 LEs         ; 9 LEs                ; 0 LEs                  ; No         ; |main|data_in[3]                       ;
+; 12:1               ; 15 bits   ; 120 LEs       ; 60 LEs               ; 60 LEs                 ; No         ; |main|bird_extended:br1|Mux64          ;
+; 4:1                ; 16 bits   ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |main|bird_extended:br1|Add4           ;
+; 7:1                ; 16 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; No         ; |main|bird_extended:br1|Selector142    ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; No         ; |main|bird_extended:br1|Add4           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------------------+
 
 
 +-----------------------------------------------------+
@@ -308,18 +343,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
 ; boundary_port         ; 21                          ;
-; cycloneiii_ff         ; 38                          ;
-;     plain             ; 38                          ;
-; cycloneiii_lcell_comb ; 42                          ;
-;     arith             ; 27                          ;
-;         2 data inputs ; 25                          ;
-;         3 data inputs ; 2                           ;
-;     normal            ; 15                          ;
-;         0 data inputs ; 2                           ;
-;         1 data inputs ; 13                          ;
+; cycloneiii_ff         ; 4422                        ;
+;     ENA               ; 4275                        ;
+;     ENA SLD           ; 32                          ;
+;     plain             ; 115                         ;
+; cycloneiii_lcell_comb ; 4543                        ;
+;     arith             ; 119                         ;
+;         2 data inputs ; 71                          ;
+;         3 data inputs ; 48                          ;
+;     normal            ; 4424                        ;
+;         1 data inputs ; 843                         ;
+;         2 data inputs ; 11                          ;
+;         3 data inputs ; 414                         ;
+;         4 data inputs ; 3156                        ;
 ;                       ;                             ;
-; Max LUT depth         ; 2.40                        ;
-; Average LUT depth     ; 1.69                        ;
+; Max LUT depth         ; 16.50                       ;
+; Average LUT depth     ; 10.43                       ;
 +-----------------------+-----------------------------+
 
 
@@ -328,7 +367,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:15     ;
 +----------------+--------------+
 
 
@@ -338,7 +377,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 21.1.0 Build 842 10/21/2021 SJ Lite Edition
-    Info: Processing started: Sun Jan 30 17:02:28 2022
+    Info: Processing started: Fri Feb  4 13:03:23 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off project_3 -c project_3
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
@@ -352,49 +391,47 @@ Info (12021): Found 1 design units, including 1 entities, in source file keypad.
     Info (12023): Found entity 1: keypad File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/keypad.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file bird_extended.v
     Info (12023): Found entity 1: bird_extended File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/bird_extended.v Line: 1
-Warning (10236): Verilog HDL Implicit Net warning at main.v(36): created implicit net for "data_in" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 36
-Warning (10236): Verilog HDL Implicit Net warning at main.v(36): created implicit net for "data_out" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 36
-Warning (10236): Verilog HDL Implicit Net warning at main.v(36): created implicit net for "address" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 36
-Warning (10236): Verilog HDL Implicit Net warning at main.v(36): created implicit net for "memld" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 36
 Info (12127): Elaborating entity "main" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at main.v(15): object "memory" assigned a value but never read File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 15
-Warning (10850): Verilog HDL warning at main.v(43): number of words (3) in memory file does not match the number of elements in the address range [0:255] File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 43
-Warning (10855): Verilog HDL warning at main.v(39): initial value for variable memory should be constant File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 39
-Info (12128): Elaborating entity "sevensegment" for hierarchy "sevensegment:ss1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 30
-Info (12128): Elaborating entity "keypad" for hierarchy "keypad:kp1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 32
-Info (12128): Elaborating entity "timer" for hierarchy "timer:tm1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 34
+Warning (10240): Verilog HDL Always Construct warning at main.v(46): inferring latch(es) for variable "statusordata", which holds its previous value in one or more paths through the always construct File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 46
+Warning (10240): Verilog HDL Always Construct warning at main.v(46): inferring latch(es) for variable "keypad_ack", which holds its previous value in one or more paths through the always construct File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 46
+Warning (10240): Verilog HDL Always Construct warning at main.v(46): inferring latch(es) for variable "timeorready", which holds its previous value in one or more paths through the always construct File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 46
+Warning (10240): Verilog HDL Always Construct warning at main.v(46): inferring latch(es) for variable "timer_ack", which holds its previous value in one or more paths through the always construct File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 46
+Warning (10850): Verilog HDL warning at main.v(99): number of words (213) in memory file does not match the number of elements in the address range [0:255] File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 99
+Info (10041): Inferred latch for "timeorready" at main.v(46) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 46
+Info (10041): Inferred latch for "timer_ack" at main.v(52) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 52
+Info (10041): Inferred latch for "keypad_ack" at main.v(52) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 52
+Info (10041): Inferred latch for "statusordata" at main.v(52) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 52
+Info (12128): Elaborating entity "sevensegment" for hierarchy "sevensegment:ss1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 37
+Info (12128): Elaborating entity "keypad" for hierarchy "keypad:kp1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 39
+Info (12128): Elaborating entity "timer" for hierarchy "timer:tm1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 41
 Warning (10036): Verilog HDL or VHDL warning at timer.v(12): object "timee" assigned a value but never read File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/timer.v Line: 12
 Warning (10230): Verilog HDL assignment warning at timer.v(19): truncated value with size 32 to match size of target (16) File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/timer.v Line: 19
-Info (12128): Elaborating entity "bird_extended" for hierarchy "bird_extended:br1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 36
-Warning (12241): 1 hierarchies have connectivity warnings - see the Connectivity Checks report folder
-Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "display[0]" is stuck at VCC File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 8
-    Warning (13410): Pin "display[1]" is stuck at VCC File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 8
-    Warning (13410): Pin "display[2]" is stuck at VCC File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 8
-    Warning (13410): Pin "display[3]" is stuck at VCC File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 8
-    Warning (13410): Pin "display[4]" is stuck at VCC File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 8
-    Warning (13410): Pin "display[5]" is stuck at VCC File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 8
-    Warning (13410): Pin "display[6]" is stuck at GND File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 8
+Info (12128): Elaborating entity "bird_extended" for hierarchy "bird_extended:br1" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 43
+Info (276014): Found 1 instances of uninferred RAM logic
+    Info (276007): RAM logic "memory" is uninferred due to asynchronous read logic File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 16
+Warning (127007): Memory Initialization File or Hexadecimal (Intel-Format) File "C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/db/project_3.ram0_main_3dde57.hdl.mif" contains "don't care" values -- overwriting them with 0s
+Warning (13012): Latch timeorready has unsafe behavior File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 35
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal bird_extended:br1|pc[4] File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/bird_extended.v Line: 34
+Warning (13012): Latch statusordata has unsafe behavior File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 30
+    Warning (13013): Ports ENA and PRE on the latch are fed by the same signal bird_extended:br1|pc[4] File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/bird_extended.v Line: 34
+Warning (13012): Latch timer_ack has unsafe behavior File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 34
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal bird_extended:br1|pc[4] File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/bird_extended.v Line: 34
+Warning (13012): Latch keypad_ack has unsafe behavior File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 29
+    Warning (13013): Ports ENA and PRE on the latch are fed by the same signal bird_extended:br1|pc[4] File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/bird_extended.v Line: 34
 Info (286030): Timing-Driven Synthesis is running
-Info (17049): 23 registers lost all their fanouts during netlist optimizations.
+Info (17049): 21 registers lost all their fanouts during netlist optimizations.
 Info (144001): Generated suppressed messages file C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/output_files/project_3.map.smsg
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 5 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "button" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 3
-    Warning (15610): No output dependent on input pin "colread[0]" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 5
-    Warning (15610): No output dependent on input pin "colread[1]" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 5
-    Warning (15610): No output dependent on input pin "colread[2]" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 5
-    Warning (15610): No output dependent on input pin "colread[3]" File: C:/Users/rsan/projects/school/CSE4117-Microprocessors/Project_3/Verilog/main.v Line: 5
-Info (21057): Implemented 59 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 8054 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 6 input pins
     Info (21059): Implemented 15 output pins
-    Info (21061): Implemented 38 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 25 warnings
-    Info: Peak virtual memory: 4820 megabytes
-    Info: Processing ended: Sun Jan 30 17:02:41 2022
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:30
+    Info (21061): Implemented 8033 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 17 warnings
+    Info: Peak virtual memory: 4866 megabytes
+    Info: Processing ended: Fri Feb  4 13:03:53 2022
+    Info: Elapsed time: 00:00:30
+    Info: Total CPU time (on all processors): 00:00:49
 
 
 +------------------------------------------+

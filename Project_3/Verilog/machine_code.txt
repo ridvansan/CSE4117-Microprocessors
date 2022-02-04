@@ -1,0 +1,164 @@
+.data
+.code
+reset	ldi 1 0x0000
+		ldi 7 0x00fa
+		ldi 0 0
+		ldi 1 0
+		ldi 2 0
+		ldi 3 0
+		ldi 4 0
+		ldi 5 0
+		ldi 6 0
+		call disp
+start	ldi 3 0x00fc
+        ld 3 3
+        or 3 3 3
+        jz  cont0
+        call kpad_seq
+cont0   ldi 3 0x00ff
+        ld 3 3
+        or 3 3 3
+        jz cont1
+        call button_seq
+cont1   or 6 6 6
+end		jmp start
+
+button_seq  push 1
+            ldi 1 0x00fb
+            ld 1 1
+            call disp
+            pop 1
+            ret
+
+kpad_seq    ldi 2 0x00fd
+            ld 2 2
+            ldi 3 0xe
+            xor 3 2 3
+            jz add
+			jmp chk_res
+add			add 1 0 1
+			call disp
+			mov 0 1
+			ldi 1 0
+			jmp seq_end
+chk_res     ldi 3 0xa
+            xor 3 2 3
+            jz reset
+            call up_in
+            call disp
+seq_end		ret
+
+//Updates the input by multiplication by 10 and adding the new input
+//Checks the operand and if operand is greater than 10000 than substrack 10000 from the operand
+//in order to prevent the operand exceed 4-digit
+up_in	ldi 5 0x3e8
+		mov 4 1
+		call div
+		mov 1 4
+		mov 4 1
+		ldi 5 0x000a
+		call mult
+		add 1 2 6
+up_exc  call disp
+        ret
+
+disp	push 3
+		push 1
+		ldi 3 0xfe
+		call hextobcd
+		st 3 1
+		pop 1
+		pop 3
+		ret
+
+//Swaps reg_4 and reg_5 with using memory
+swap_op push 0
+        push 1
+        pop 0
+        pop 1
+        ret
+
+lt      push 4
+        push 5
+		ldi 6 0x0
+		sub 6 5 4
+		jz lt_fail
+		ldi 5 0x8000    //16-bit number with 1 at 16th bit 0 otherwise
+		and 6 6 5       //Checks if the reg_6's 16th bit is zero or not in order to check its sign.
+		jz lt_conf
+		ldi 6 0x0
+		jmp lt_fail
+lt_conf ldi 6 0x1
+lt_fail pop 5
+        pop 4
+		or 6 6 6
+    	ret
+
+mult	    call lt				//Checks if reg_4 is less than reg_5		
+            jz mult_start		//If it is not continue
+            ldi 6 0             //Load zero to reg_6
+            call swap			//Else swap the number in order to optimize (descripted at the end of the function)
+mult_start	and 5 5 5
+			jz mult_end			//If reg_5 is zero ends the function
+mult_loop	add 6 6 4           //Add reg_4 to reg_6 our objective in here is the add reg_4 to reg_6 reg_5 times.
+	        dec 5               //Decrease reg_5
+	        jz mult_end         //if reg_5 is zero end the multiplication
+	        jmp mult_loop       //if not continue
+mult_end	ret                 //return to address
+
+//Swaps reg_4 and reg_5 with using memory
+swap    push 4
+        push 5
+        pop 4
+        pop 5
+        ret
+
+div	    	ldi 6 0x0000
+div_check   push 6
+			and 5 5 5
+			jz div_end
+            call lt		    // Check if reg_4 is bigger than reg_5 in order to begin the division
+	    	jz div_loop
+	    	jmp div_end
+div_loop    pop 6
+            inc 6
+            sub 4 4 5
+            jmp div_check
+div_end     pop 6
+			ret
+
+//Hex to BCD converter function
+//TODO shows less than desired result by one. Find the cause
+//Converts hexadecimal numbers into bcd format
+//Example: 0xA2 which is 162 in decimal format
+//Output of this program will be 0x162
+hextobcd 	mov 4 1		//Copy the data in reg_0 to reg_4 for division
+	        ldi 5 0x3E8 //Load decimal 1000 to reg_5 
+	        call div	//After this division reg_6 will contain result and reg_4 mod.
+	        push 6		//Push result into memory.
+	        ldi 5 0x64  //Load decimal 
+	        call div
+	        push 6
+	        ldi 5 0xA // 10
+	        call div
+	        push 6
+	        ldi 5 0x1 // 1
+	        call div
+	        push 6
+//TODO Operation with the number 1 can be optimized
+	        ldi 1 0		//Load 0 to reg_1	
+	        pop 4		//Get the last pushed data to reg_4
+	        add 1 1 4	//Add result to reg_1
+	        ldi 5 0x10	//Load reg_5 0x10 , 0x100...	
+	        pop 4
+	        call mult
+	        add 1 1 6
+	        ldi 5 0x100
+	        pop 4
+	        call mult
+	        add 1 1 6
+	        ldi 5 0x1000
+	        pop 4
+	        call mult
+	        add 1 1 6
+	        ret

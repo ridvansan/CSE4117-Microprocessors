@@ -113,6 +113,8 @@ def get_instruction_code(instruction, dest, src1, src2,idx):
             binary = (int(src1) & 0xffff)
         elif str(src1)[:2] == "0x":
             binary = int(src1[2:], 16)
+        elif str(src1) in jumptable.keys():
+            binary = int(jumptable[src1][0])
         else:
             binary = 0x0000
             add_data_request(src1, (idx+1))

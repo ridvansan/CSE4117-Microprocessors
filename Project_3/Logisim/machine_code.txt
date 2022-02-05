@@ -2,13 +2,25 @@
 .code
     jmp head
 //Decleration of interrupt routines
-timer_routine   ldi 1 0xffff
+timer_routine   cli
+				push 1
+				push 2
+				push 3
+				ldi 1 0xffff
                 ld 1 1
                 call disp_t
+				pop 3
+				pop 2
+				pop 1
+				sti
                 iret
 
 head    	ldi 7 0xffe0
 //TODO Implement interrupt table
+			ldi 1 timer_routine
+			ldi 2 0x7f0
+			st 2 1
+			sti
 start   	ldi 1 0xfffe
 			ld 1 1
 			and 1 1 1
@@ -37,8 +49,8 @@ disp_r	push 3
 
 disp_t	push 3
 		push 1
-		ldi 3 0xff0
 		call hextobcd
+		ldi 3 0xfff0
 		st 3 1
 		pop 1
 		pop 3

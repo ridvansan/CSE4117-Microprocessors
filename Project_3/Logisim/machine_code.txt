@@ -1,0 +1,137 @@
+.data
+.code
+    jmp head
+//Decleration of interrupt routines
+timer_routine   ldi 1 0xffff
+                ld 1 1
+                call disp_t
+                iret
+
+head    	ldi 7 0xffe0
+//TODO Implement interrupt table
+start   	ldi 1 0xfffe
+			ld 1 1
+			and 1 1 1
+			jz start
+			ldi 1 0xfffc
+			ld 1 1
+			ldi 2 0xfffd
+			ld 2 2
+			add 1 1 2
+			call disp_r
+pb_res		ldi 1 0xfffe
+			ld 1 1
+			jz start
+			jmp pb_res
+end        	jmp start
+
+
+disp_r	push 3
+		push 1
+		call hextobcd
+		ldi 3 0xfff1
+		st 3 1
+		pop 1
+		pop 3
+		ret
+
+disp_t	push 3
+		push 1
+		ldi 3 0xff0
+		call hextobcd
+		st 3 1
+		pop 1
+		pop 3
+		ret
+
+//Multiplication function
+//This function is reg_6 = reg_4 * reg_5
+mult	    call lt				//Checks if reg_4 is less than reg_5
+            and 5 5 5		
+            jz mult_start		//If it is not continue
+            ldi 5 0             //Load zero to reg_6
+            call swap			//Else swap the number in order to optimize (descripted at the end of the function)
+mult_start	and 4 4 4
+			jz mult_end			//If reg_5 is zero ends the function
+mult_loop	add 5 5 3           //Add reg_4 to reg_6 our objective in here is the add reg_4 to reg_6 reg_5 times.
+	        dec 4               //Decrease reg_5
+	        jz mult_end         //if reg_5 is zero end the multiplication
+	        jmp mult_loop       //if not continue
+mult_end	ret                 //return to address
+
+//TODO describe optimization
+
+
+
+//Less than function 
+//If r4 < r5 changes r6's value to one, zero otherwise.
+lt      push 3
+        push 4
+		sub 5 4 3
+		jz lt_fail
+		ldi 4 0x8000    //16-bit number with 1 at 16th bit 0 otherwise
+		and 5 5 4       //Checks if the reg_6's 16th bit is zero or not in order to check its sign.
+		jz lt_conf
+		ldi 5 0x0
+		jmp lt_fail
+lt_conf ldi 5 0x1
+lt_fail pop 4
+        pop 3
+		and 5 5 5
+        ret
+
+//Swaps reg_4 and reg_5 with using memory
+swap    push 3
+        push 4
+        pop 3
+        pop 4
+        ret
+
+//Division function
+//reg_6 = reg_4 / reg_5
+//TODO check for division by zero may cause infinite loop 
+div	    	ldi 5 0x0
+div_check   push 5
+			and 4 4 4
+			jz div_end
+            call lt         // Check if reg_4 is bigger than reg_5 in order to begin the division
+            and 5 5 5       //In order to trigger the zeroflag TODO check if this is necessary
+	    	jz div_loop
+	    	jmp div_end
+div_loop    pop 5
+            inc 5
+            sub 3 3 4
+            jmp div_check
+div_end     pop 5
+            ret
+
+
+hextobcd 	mov 3 1		//Copy the data in reg_0 to reg_4 for division
+	        ldi 4 0x3E8 //Load decimal 1000 to reg_5 
+	        call div	//After this division reg_6 will contain result and reg_4 mod.
+	        push 5		//Push result into memory.
+	        ldi 4 0x64  //Load decimal 
+	        call div
+	        push 5
+	        ldi 4 0xA // 10
+	        call div
+	        push 5
+	        ldi 4 0x1 // 1
+	        call div
+	        push 5
+	        ldi 1 0		//Load 0 to reg_1	
+	        pop 3		//Get the last pushed data to reg_4
+	        add 1 1 3	//Add result to reg_1
+	        ldi 4 0x10	//Load reg_5 0x10 , 0x100...	
+	        pop 3
+	        call mult
+	        add 1 1 5
+	        ldi 4 0x100
+	        pop 3
+	        call mult
+	        add 1 1 5
+	        ldi 4 0x1000
+	        pop 3
+	        call mult
+	        add 1 1 5
+	        ret

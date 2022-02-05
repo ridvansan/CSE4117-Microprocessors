@@ -57,7 +57,7 @@ bird_opcodes = {
     "push": 0x8,    #Bird instructions
     "pop": 0x9,
     "call": 0xa,
-    "ret": 0xb,
+    "ret": 0xb
 }
 
 vertebrate_opcodes = {
@@ -127,8 +127,8 @@ def get_processor_specs(processor_type):
         address_bit_size = 12
         alucodes = four_bits_alucodes
         alucodeshift = 8
-
         opcodes = reptile_opcodes
+
     elif processor_type == "reptile-8":
         address_bit_size = 12
         opcodes = reptile_opcodes
@@ -406,7 +406,7 @@ if __name__ == '__main__':
     elements = get_elements(code_text)
     get_processor_specs(processor)
     machine_code = []
-
+    
 
 
     for idx,line in enumerate(get_data_section(lines)):

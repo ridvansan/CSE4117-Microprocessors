@@ -3,3 +3,8 @@ This repo contains CSE4117 Microprocessors lecture's homeworks and projects done
 Ayşe Karahasan\
 Efe Berke Erkeskin\
 Rıdvan San
+
+
+Some Errors:\
+Assembler doesn't quite work with 12 bits.\
+in Vertebrate and Project 3's Logisim Interrupts are not working quite. 

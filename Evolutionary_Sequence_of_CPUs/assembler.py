@@ -102,7 +102,7 @@ datatable = {}
 machine_code = []
 
 register_bit_size = 3
-address_bit_size = 12
+address_bit_size = 16
 
 # TODO implement in main
 # TODO test dictionary merging's overwrite
